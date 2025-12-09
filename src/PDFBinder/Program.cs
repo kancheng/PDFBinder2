@@ -29,7 +29,19 @@ namespace PDFBinder
         [STAThread]
         static void Main(string[] args)
         {
-            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");//zh-CN
+            // Load saved language setting
+            string savedLanguage = PDFBinder.Properties.Settings.Default.Language;
+            if (!string.IsNullOrEmpty(savedLanguage))
+            {
+                try
+                {
+                    System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(savedLanguage);
+                }
+                catch
+                {
+                    // Use default culture if saved language is invalid
+                }
+            }
 
             // Start uninstallation if command line is /u {product-code}.
             if (args.Length == 2 && args[0].Equals("/u", StringComparison.OrdinalIgnoreCase))

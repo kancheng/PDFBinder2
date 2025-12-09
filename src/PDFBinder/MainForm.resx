@@ -5228,7 +5228,7 @@
     <value>Magenta</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PDF合并器v2.0</value>
+    <value>PDF合并器</value>
   </data>
   <data name="&gt;&gt;helpLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

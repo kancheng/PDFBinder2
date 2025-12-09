@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Threading;
 using Microsoft.VisualBasic;
 
 namespace PDFBinder
@@ -21,10 +23,89 @@ namespace PDFBinder
         }
 
         private System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+        private string currentLanguage = "en";
+
         public MainForm()
         {
             InitializeComponent();
+            LoadLanguage();
             UpdateUI();
+        }
+
+        private void LoadLanguage()
+        {
+            string savedLanguage = Properties.Settings.Default.Language;
+            if (!string.IsNullOrEmpty(savedLanguage))
+            {
+                ChangeLanguage(savedLanguage);
+            }
+        }
+
+        private void ChangeLanguage(string languageCode)
+        {
+            try
+            {
+                CultureInfo culture = new CultureInfo(languageCode);
+                Thread.CurrentThread.CurrentUICulture = culture;
+                currentLanguage = languageCode;
+                Properties.Settings.Default.Language = languageCode;
+                Properties.Settings.Default.Save();
+
+                resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+                ApplyResources();
+                UpdateLanguageMenu();
+            }
+            catch
+            {
+                // If language code is invalid, use default
+            }
+        }
+
+        private void ApplyResources()
+        {
+            resources.ApplyResources(this, "$this");
+            resources.ApplyResources(this.FileListBox, "FileListBox");
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
+            resources.ApplyResources(this.addFileButton, "addFileButton");
+            resources.ApplyResources(this.removeButton, "removeButton");
+            resources.ApplyResources(this.moveUpButton, "moveUpButton");
+            resources.ApplyResources(this.moveDownButton, "moveDownButton");
+            resources.ApplyResources(this.completeButton, "completeButton");
+            resources.ApplyResources(this.showNameButton, "showNameButton");
+            resources.ApplyResources(this.sortButton, "sortButton");
+            resources.ApplyResources(this.saveFileDialog, "saveFileDialog");
+            resources.ApplyResources(this.addFileDialog, "addFileDialog");
+            resources.ApplyResources(this.progressBar, "progressBar");
+            resources.ApplyResources(this.helpLabel, "helpLabel");
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
+            resources.ApplyResources(this.mnuSetPageRange, "mnuSetPageRange");
+            resources.ApplyResources(this.mnuClear, "mnuClear");
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
+            resources.ApplyResources(this.languageToolStripMenuItem, "languageToolStripMenuItem");
+            resources.ApplyResources(this.englishToolStripMenuItem, "englishToolStripMenuItem");
+            resources.ApplyResources(this.germanToolStripMenuItem, "germanToolStripMenuItem");
+            resources.ApplyResources(this.japaneseToolStripMenuItem, "japaneseToolStripMenuItem");
+            resources.ApplyResources(this.frenchToolStripMenuItem, "frenchToolStripMenuItem");
+            resources.ApplyResources(this.simplifiedChineseToolStripMenuItem, "simplifiedChineseToolStripMenuItem");
+            resources.ApplyResources(this.traditionalChineseToolStripMenuItem, "traditionalChineseToolStripMenuItem");
+        }
+
+        private void UpdateLanguageMenu()
+        {
+            foreach (ToolStripMenuItem item in languageToolStripMenuItem.DropDownItems)
+            {
+                item.Checked = (item.Tag?.ToString() == currentLanguage);
+            }
+        }
+
+        private void LanguageMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            if (menuItem != null && menuItem.Tag != null)
+            {
+                string languageCode = menuItem.Tag.ToString();
+                ChangeLanguage(languageCode);
+            }
         }
 
         public void AddInputFile(string file)
@@ -196,8 +277,8 @@ namespace PDFBinder
                 FileListBox.SelectedItems.Add(collect[i]);
         }
 
-        private Color ColorAlt = Color.FromArgb(240, 240, 240);//½»ÌæÉ« 
-        private Color ColorSelected = Color.FromArgb(150, 200, 250);//Ñ¡ÔñÏîÄ¿ÑÕÉ« 
+        private Color ColorAlt = Color.FromArgb(240, 240, 240);//ï¿½ï¿½ï¿½ï¿½É« 
+        private Color ColorSelected = Color.FromArgb(150, 200, 250);//Ñ¡ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½É« 
 
         private void FileListBox_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -219,7 +300,7 @@ namespace PDFBinder
                 myBrush = new SolidBrush(Color.White);
             }
             e.Graphics.FillRectangle(myBrush, e.Bounds);
-            e.DrawFocusRectangle();//½¹µã¿ò 
+            e.DrawFocusRectangle();//ï¿½ï¿½ï¿½ï¿½ï¿½ 
 
             StringFormat Formater = new StringFormat();
             Formater.Alignment = StringAlignment.Near;
@@ -227,7 +308,7 @@ namespace PDFBinder
             Formater.Trimming = StringTrimming.EllipsisPath;
             Formater.FormatFlags = StringFormatFlags.NoWrap;
 
-            //ÎÄ±¾ 
+            //ï¿½Ä±ï¿½ 
             /*string[] text = FileListBox.Items[e.Index].ToString().Split('\n');
             if (showNameButton.Checked)
                 e.Graphics.DrawString(text[0], e.Font, Brushes.Black, new Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width - 80, e.Bounds.Height), Formater);
@@ -235,7 +316,7 @@ namespace PDFBinder
                 e.Graphics.DrawString(Path.GetFileName(text[0]), e.Font, Brushes.Black, new Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width - 80, e.Bounds.Height), Formater);
 
             Formater.Alignment = StringAlignment.Far;
-            e.Graphics.DrawString((text[1] == "" ? "" : text[1] + " | ") + "¹² " + text[2] + " Ò³", e.Font, Brushes.Gray, e.Bounds, Formater);
+            e.Graphics.DrawString((text[1] == "" ? "" : text[1] + " | ") + "ï¿½ï¿½ " + text[2] + " Ò³", e.Font, Brushes.Gray, e.Bounds, Formater);
             */
             PdfInfo item = (PdfInfo)FileListBox.Items[e.Index];
             e.Graphics.DrawString(showNameButton.Checked ? item.Fullname : item.Filename, e.Font, Brushes.Black, new Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width - RIGHT_MARGIN, e.Bounds.Height), Formater);
@@ -320,7 +401,7 @@ namespace PDFBinder
                     return;
                 }
 
-                string[] arr = range.Replace("£¬", ",").Replace(" ", "").Split(',');
+                string[] arr = range.Replace("ï¿½ï¿½", ",").Replace(" ", "").Split(',');
                 range = "";
                 for (int i = 0; i < arr.Length; i++)
                 {

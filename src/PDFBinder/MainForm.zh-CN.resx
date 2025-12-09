@@ -4908,4 +4908,28 @@
         AAA=
 </value>
   </data>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 24</value>
+  </data>
+  <data name="languageToolStripMenuItem.Text" xml:space="preserve">
+    <value>语言(&amp;L)</value>
+  </data>
+  <data name="englishToolStripMenuItem.Text" xml:space="preserve">
+    <value>英文(&amp;E)</value>
+  </data>
+  <data name="germanToolStripMenuItem.Text" xml:space="preserve">
+    <value>德文(&amp;D)</value>
+  </data>
+  <data name="japaneseToolStripMenuItem.Text" xml:space="preserve">
+    <value>日文(&amp;J)</value>
+  </data>
+  <data name="frenchToolStripMenuItem.Text" xml:space="preserve">
+    <value>法文(&amp;F)</value>
+  </data>
+  <data name="simplifiedChineseToolStripMenuItem.Text" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="traditionalChineseToolStripMenuItem.Text" xml:space="preserve">
+    <value>繁体中文</value>
+  </data>
 </root>

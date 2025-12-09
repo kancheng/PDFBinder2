@@ -49,8 +49,17 @@ namespace PDFBinder
             this.addFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.helpLabel = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.germanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.japaneseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.frenchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simplifiedChineseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.traditionalChineseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // FileListBox
@@ -197,6 +206,67 @@ namespace PDFBinder
             resources.ApplyResources(this.helpLabel, "helpLabel");
             this.helpLabel.Name = "helpLabel";
             // 
+            // menuStrip1
+            // 
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.languageToolStripMenuItem});
+            this.menuStrip1.Name = "menuStrip1";
+            // 
+            // languageToolStripMenuItem
+            // 
+            resources.ApplyResources(this.languageToolStripMenuItem, "languageToolStripMenuItem");
+            this.languageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.englishToolStripMenuItem,
+            this.germanToolStripMenuItem,
+            this.japaneseToolStripMenuItem,
+            this.frenchToolStripMenuItem,
+            this.simplifiedChineseToolStripMenuItem,
+            this.traditionalChineseToolStripMenuItem});
+            this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
+            // 
+            // englishToolStripMenuItem
+            // 
+            resources.ApplyResources(this.englishToolStripMenuItem, "englishToolStripMenuItem");
+            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
+            this.englishToolStripMenuItem.Tag = "en";
+            this.englishToolStripMenuItem.Click += new System.EventHandler(this.LanguageMenuItem_Click);
+            // 
+            // germanToolStripMenuItem
+            // 
+            resources.ApplyResources(this.germanToolStripMenuItem, "germanToolStripMenuItem");
+            this.germanToolStripMenuItem.Name = "germanToolStripMenuItem";
+            this.germanToolStripMenuItem.Tag = "de";
+            this.germanToolStripMenuItem.Click += new System.EventHandler(this.LanguageMenuItem_Click);
+            // 
+            // japaneseToolStripMenuItem
+            // 
+            resources.ApplyResources(this.japaneseToolStripMenuItem, "japaneseToolStripMenuItem");
+            this.japaneseToolStripMenuItem.Name = "japaneseToolStripMenuItem";
+            this.japaneseToolStripMenuItem.Tag = "ja";
+            this.japaneseToolStripMenuItem.Click += new System.EventHandler(this.LanguageMenuItem_Click);
+            // 
+            // frenchToolStripMenuItem
+            // 
+            resources.ApplyResources(this.frenchToolStripMenuItem, "frenchToolStripMenuItem");
+            this.frenchToolStripMenuItem.Name = "frenchToolStripMenuItem";
+            this.frenchToolStripMenuItem.Tag = "fr";
+            this.frenchToolStripMenuItem.Click += new System.EventHandler(this.LanguageMenuItem_Click);
+            // 
+            // simplifiedChineseToolStripMenuItem
+            // 
+            resources.ApplyResources(this.simplifiedChineseToolStripMenuItem, "simplifiedChineseToolStripMenuItem");
+            this.simplifiedChineseToolStripMenuItem.Name = "simplifiedChineseToolStripMenuItem";
+            this.simplifiedChineseToolStripMenuItem.Tag = "zh-CN";
+            this.simplifiedChineseToolStripMenuItem.Click += new System.EventHandler(this.LanguageMenuItem_Click);
+            // 
+            // traditionalChineseToolStripMenuItem
+            // 
+            resources.ApplyResources(this.traditionalChineseToolStripMenuItem, "traditionalChineseToolStripMenuItem");
+            this.traditionalChineseToolStripMenuItem.Name = "traditionalChineseToolStripMenuItem";
+            this.traditionalChineseToolStripMenuItem.Tag = "zh";
+            this.traditionalChineseToolStripMenuItem.Click += new System.EventHandler(this.LanguageMenuItem_Click);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -205,11 +275,15 @@ namespace PDFBinder
             this.Controls.Add(this.helpLabel);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.FileListBox);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.contextMenuStrip1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,5 +310,13 @@ namespace PDFBinder
         private System.Windows.Forms.ToolStripMenuItem mnuSetPageRange;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mnuClear;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem languageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem germanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem japaneseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem frenchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem simplifiedChineseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem traditionalChineseToolStripMenuItem;
     }
 }
